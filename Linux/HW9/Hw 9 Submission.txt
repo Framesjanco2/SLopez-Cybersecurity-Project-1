@@ -1,0 +1,52 @@
+Mission 1
+ nslookup -query=mx starwars.com (Command used and results found below)
+Server:		8.8.8.8
+Address:	8.8.8.8#53
+
+Non-authoritative answer:
+starwars.com	mail exchanger = 10 aspmx2.googlemail.com.
+starwars.com	mail exchanger = 10 aspmx3.googlemail.com.
+starwars.com	mail exchanger = 5 alt2.aspmx.l.google.com.
+starwars.com	mail exchanger = 1 aspmx.l.google.com.
+starwars.com	mail exchanger = 5 alt1.aspx.l.google.com.
+
+As you can see there is no mail server titled asltx.2.google.com and that is probably why the resistance isn't receiving any emails but is still able to send them. The sending emails probably take priority and therefore are being sent on the mail server that is working and has top priority while receiving emails are not taken as priority. The Corrected DNS record should not have a 2 before a dot in the DNS record for example all the correct backup servers all are “Insert number” then “,l” or “.google” instead of “.2.google” like the proposed backup server the resistance created had. 
+Mission 2
+ "v=spf1 a mx mx:smtp.secureserver.net include:aspmx.googlemail.com ip4:104.156.250.80 ip4:45.63.15.159 ip4:45.63.4.215"
+
+The force’s emails are going to the spam folder or being blocked because as we can see above, the three IPv4 addresses that came up as the spf for theforce.net did not match the new Ip address they supposedly changed their mail server too while our servers were down which is 45.23.176.21. They can easily correct this by changing one of their SPF ip’s or adding another one that is their new mail address for them to not be sent to spam every time for us. 
+
+Mission 3 
+ nslookup -type=cname resistance.theforce.net
+Server:		8.8.8.8
+Address:	8.8.8.8#53
+
+** server can't find resistance.theforce.net: NXDOMAIN
+There is no domain titled resistance.theforce.net and therefore there is no CNAME for this website to direct traffic to theforce.net either. The corrected DNS record would mention that the Cname domain of resistance.theforce.net would be just theforce.net if it existed.
+
+Mission 4
+nslookup -type=a princessleia.site
+Server:  cdns1.cox.net
+Address:  2001:578:3f::30
+
+Non-authoritative answer:
+Name:    princessleia.site
+Addresses:  20.40.202.19
+          34.102.136.180
+You could fix this problem by adding a backup server and use the one they provided which was ns2.galaxybackup.com it would have to be added to the list of Cnames as well.
+Mission 5
+The shortest route i could find was Batuu-D-C-E-F-J-I-M-L-Q-T-V-Jedha which did not involve the planet N 
+https://asu.bootcampcontent.com/asu-coding-bootcamp/asu-virt-cyber-pt-08-2021-u-lol/activity
+
+Mission 6
+sudo aircrack-ng -w ~/Desktop/rockyou.txt ~/Downloads/Darkside.pcap 
+Opening /home/sysadmin/Downloads/Darkside.pcap
+Host Ip address: 172.16.0.101 Host Mac address: 00:13:ce:55:98:ef
+
+
+
+
+
+
+
+
