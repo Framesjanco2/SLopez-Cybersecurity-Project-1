@@ -4,9 +4,13 @@ Stephen Lopez
 
 The files in this repository were used to configure the network depicted below.
 
+![](https://github.com/Framesjanco2/SLopez-Cybersecurity-Project-1/blob/main/Diagrams/Cloud-Network-Diagram.PNG)
 
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
+- [ELk Install](https://github.com/Framesjanco2/SLopez-Cybersecurity-Project-1/blob/main/ansible/Install-Elk.yml.txt)
+- [Metricbeat Playbook](https://github.com/Framesjanco2/SLopez-Cybersecurity-Project-1/blob/main/ansible/metricbeat-playbook.yml.txt)
+- [Filebeat Playbook](https://github.com/Framesjanco2/SLopez-Cybersecurity-Project-1/blob/main/ansible/filebeat-playbook.yml.txt)
 
 -Elk Instaall
 -Metricbeat Playbook
@@ -68,38 +72,39 @@ Ansible was used to automate configuration of the ELK machine. No configuration 
 
 The playbook implements the following tasks:
 - Installs docker.io, pip3 and the docker module 
+```bash  
     # Use apt module
-    - name: Install docker.io
+     - name: Install docker.io
       apt:
         update_cache: yes
         name: docker.io
         state: present
 
       # Use apt module
-    - name: Install pip3
+     - name: Install pip3
       apt:
         force_apt_get: yes
         name: python3-pip
         state: present
-
+        
       # Use pip module
-    - name: Install Docker python module
+     - name: Install Docker python module
       pip:
         name: docker
         state: present
-
+```
 - Uses sysctl model and allows it to use more memory
-
-  # Use sysctl module
-    - name: Use more memory
-      sysctl:
-        name: vm.max_map_count
-        value: "262144"
-        state: present
-        reload: yes
-
+```bash
+   # Use sysctl module
+     - name: Use more memory
+       sysctl:
+         name: vm.max_map_count
+         value: "262144"
+         state: present
+         reload: yes
+```
 - Downloads and launches the docker container for our Elk server
-
+```bash
       # Use docker_container module
     - name: download and launch a docker elk container
       docker_container:
@@ -111,9 +116,9 @@ The playbook implements the following tasks:
           - 5601:5601
           - 9200:9200
           - 5044:5044
-
+```
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
-Insert Screenshot here
+![](https://github.com/Framesjanco2/SLopez-Cybersecurity-Project-1/blob/main/Images/docker_ps_output.PNG)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
@@ -135,7 +140,6 @@ SSH into the control node and follow the steps below:
 - Update the Ansible hosts file found in /etc/ansible/hosts to include the IP address of the ELk server VM and web VM's
 - Run the playbook, and navigate to http://[Elk_VM_Public_IP]:5601/app/kibana to check that the installation worked as expected.
 
-_TODO: Answer the following questions to fill in the blanks:_
 - _Which file is the playbook? - The Filebeat-configuration
 - _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on? - You need to speicify which machine by editing the hosts file with the IP address of the web and ELK servers and selecting the group so Ansible knows which one it is part of 
 - _Which URL do you navigate to in order to check that the ELK server is running?  http://[your.ELK-VM.External.IP]:5601/app/kibana.
